@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Manage your links{% endblock %}
+{% block description %}View and manage links you created{% endblock %}
+
+{% block content %}
+<div class="container bottom-offset voffset-1">
+	<div class="panel panel-tldr">
+		<div class="panel-heading">Manage your links</div>
+		<div class="panel-body">
+			<div id="delete-alert" class="alert alert-warning alert-dismissable hide">
+				<button type="button" class="close" data-hide="alert" aria-hidden="true">&times;</button>
+				Selected links were deleted. <a id='delete-undo' href='javascript:void(0);'>Undo</a>
+			</div>
+			<div id="table-container">
+				<div class="alert alert-info hide">No links found, please <a href='/'>create</a> some first.</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block body %}
+	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/2.10.6/moment.min.js"></script>
+	<script type="text/javascript" src="/static/js/bootstrap-datatable.min.js"></script>
+	<script type="text/javascript" src="/static/js/manage.min.js?v20140324-1122"></script>
+{% endblock %}

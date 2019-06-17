@@ -1,0 +1,20 @@
+{% extends "form.html" %}
+
+{% block title %}Login{% endblock %}
+{% block description %}Log into TLDRify Website here{% endblock %}
+
+{% block form %}
+	<div class="form-group">
+		<input class="form-control" autofocus placeholder="E-mail" name="email" type="email" required value="{{ form.email.data if form.email.data != None }}"></input>
+	</div>
+	<div class="form-group">
+		<input class="form-control" placeholder="Password" name="password" type="password" value="" required></input>
+	</div>
+	<div class="form-group">
+		<input class="btn btn-lg btn-success btn-block" type="submit" value="Login"></input>
+	</div>
+	<div class="form-group">
+		<a href="/signup">Create an account</a>
+		<a href="/resetpass" class="pull-right">Reset password</a>
+	</div>
+{% endblock %}

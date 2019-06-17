@@ -1,0 +1,16 @@
+{% extends "form.html" %}
+
+{% block title %}Change Password{% endblock %}
+{% block description %}Update your password for TLDRify service{% endblock %}
+
+{% block form %}
+	<div class="form-group">
+		<input class="form-control" placeholder="New Password" name="password" type="password" value="" required></input>
+	</div>
+	<div class="form-group">
+		<input class="form-control" placeholder="Confirm New Password" name="confirm" type="password" value="" required></input>
+	</div>
+	<div class="form-group">
+		<input class="btn btn-lg btn-success btn-block" type="submit" value="Update"></input>
+	</div>
+{% endblock %}

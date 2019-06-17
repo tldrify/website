@@ -1,0 +1,13 @@
+<html>
+<body>
+
+<p>Dear Sir/Madam,</p>
+<p>To change your password, please click on this URL:</p>
+<p>
+  <a href="{{ url_for('changepass', _external=True, token=token) }}">{{ url_for('changepass', _external=True, token=token) }}</a>
+</p>
+<p>Best regards,</p>
+<p>TLDRify service.</p>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "form.html" %}
+
+{% block title %}Password Reset{% endblock %}
+{% block description %}Reset your password to TLDRify service{% endblock %}
+
+{% block form %}
+  <div class="form-group">
+    <input class="form-control" autofocus placeholder="E-mail" name="email" type="email" required value="{{ form.email.data if form.email.data != None }}"></input>
+  </div>
+  <div class="form-group">
+    <input class="btn btn-lg btn-success btn-block" type="submit" value="Reset"></input>
+  </div>
+{% endblock %}
+
+{% block underform %}
+  {% if sent is defined %}
+    <div class="bottom-offset alert alert-info">
+      <small>Please check your e-mail for further instructions.</small>
+    </div>
+    <br/><br/><br/>
+  {% endif %}
+{% endblock %}

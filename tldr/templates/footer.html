@@ -1,0 +1,15 @@
+<div class="footer">
+	{% if request.path != "/" %}
+		<a href="/">Home</a> ⋅
+	{% endif %}
+	<a href="{{ url_for('help') }}">Help</a> ⋅
+	<a href="{{ url_for('terms') }}">Terms</a> ⋅
+	<a href="{{ url_for('privacy') }}">Privacy</a> ⋅
+	<a href="mailto:webmaster@tldrify.com">Contact</a> ⋅
+	{% if current_user.is_authenticated %}
+		<a href="{{ url_for('manage') }}">Manage</a> ⋅
+		<a href="{{ url_for('logout') }}">Log out</a>
+	{% else %}
+		<a href="{{ url_for('login') }}">Log in</a>
+	{% endif %}
+</div>

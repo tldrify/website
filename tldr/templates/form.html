@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "banner.html" %}
+<div class="container voffset-2">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      {% if error is defined %}
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{ error }}
+        </div>
+      {% endif %}
+      {% for field, errors in form.errors.iteritems() %}
+        {% for error in errors %}
+          <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ error }}
+          </div>
+        {% endfor %}
+      {% endfor %}
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <form accept-charset="UTF-8" role="form" method="POST">
+            <fieldset>
+              {% block form %}{% endblock %}
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      {% block underform %}{% endblock %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+  <script src="/static/js/h5f.min.js"></script>
+  <script type="text/javascript">
+    H5F.setup(document.getElementsByTagName("form"), {
+      validClass: "has-success",
+      invalidClass: "has-error",
+      classElement: function(e) {
+        return $(e).closest('.form-group').get()[0];
+      }
+    });
+  </script>
+{% endblock %}

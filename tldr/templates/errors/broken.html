@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Website not accessible{% endblock %}
+{% block description %}The Website you are trying to access is not accessible right now{% endblock %}
+
+{% block content %}
+<div class="container voffset-1">
+	<div class="panel panel-default">
+		<div class="panel-body text-center">
+			<h1>Website Not Accessible</h1>
+			<p class="voffset-1"><i class="fa fa-chain-broken fa-5x fa-error"></i></p>
+			<p class="voffset-1">Please check that {{url|urlize(40)}} is reachable from the outside World!</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

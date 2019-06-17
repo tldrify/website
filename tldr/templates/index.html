@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% include "banner.html" %}
+
+	<div id="tutorial" class="container voffset-1">
+		<div class="page-header">
+			<h1>See it in action:</h1>
+		</div>
+		<div class="row bottom-offset">
+			<div class="col-md-12">
+				<center>
+					<iframe width="640" height="390" style='max-width:100%;' src="//www.youtube.com/embed/5n3KzgUnJxM" frameborder="0" allowfullscreen></iframe>
+				</center>
+			</div>
+		</div>
+
+		<div id="tutorial-steps-wrapper">
+			<div class="page-header">
+				<h1>Start using it:</h1>
+			</div>
+			<dl id="tutorial-steps">
+				<dt>Install the button.</dt>
+				<dd>
+					<p>Drag this button on to your Bookmarks toolbar
+                        {% if "Maxthon" in request.headers.get('User-Agent') %}
+							<span>, or install Maxthon <a href="http://extension.maxthon.com/detail/index.php?view_id=2905" target="_blank">extension</a></span>
+						{% elif request.user_agent.browser == "chrome" %}
+							<span>, or install Google Chrome <a href="//chrome.google.com/webstore/detail/dbphpdgmhigmaepjklmklmlcoinihjdo" target="_blank">extension</a></span>
+						{% elif request.user_agent.browser == "firefox" %}
+							<span>, or install Firefox <a href="//addons.mozilla.org/en-US/firefox/addon/tldrify-1/" target="_blank">extension</a></span>
+						{% elif request.user_agent.browser == "safari" %}
+							<span>, or install Safari <a href="//extensions.apple.com/details/?id=com.tldrify.safariextension-9G6ZUR3WP5">extension</a></span>
+						{% endif %}
+					:</p>
+					<a id="bookmarklet" class="btn btn-success" href="javascript:(function(d){d.body.appendChild(d.createElement('script')).src='//tldrify.com/static/js/bookmarklet.min.js?_'+new Date().getTime();})(document);">TLDRify</a>
+				</dd>
+
+				<dt>Navigate to a Website.</dt>
+				<dd><p>Go to the Website that you want to share a quote from.</p></dd>
+
+				<dt>Select some text.</dt>
+				<dd><p>Use your mouse to select a quote that you'd like to share.</p></dd>
+
+				<dt>Press the TLDRify button.</dt>
+				<dd><p>Take the generated short link, and share it instantly with your friends.</p></dd>
+			</dl>
+		</div>
+
+		<!--<div class="text-center addthis_native_toolbox" style="margin:0 auto 30px;width:497px;"></div>-->
+		<div class="text-center addthis_sharing_toolbox"></div>
+	</div>
+	<div id="paper" class="hide"></div>
+	<div id="feedback">
+		<div id="feedback-form" style='display:none;' class="col-xs-4 col-md-4 panel panel-default">
+			<form method="POST" class="form panel-body" role="form">
+				<div class="form-group">
+					<input class="form-control" name="email" placeholder="Your e-mail" type="email"
+						required {% if not current_user.email %}autofocus{% endif %} value="{{current_user.email}}" />
+				</div>
+				<div class="form-group">
+					<textarea class="form-control" name="body" {% if current_user.email %}autofocus{% endif %}
+						required placeholder="Please write your feedback here..." rows="5"></textarea>
+				</div>
+				<button class="btn btn-primary pull-right" type="submit">Send</button>
+			</form>
+		</div>
+		<div id="feedback-tab">Feedback</div>
+	</div>
+{% endblock %}
+
+{% block body %}
+	<script type="text/javascript">
+		var addthis_share = addthis_share || {}
+		addthis_share = {
+			passthrough: {
+				twitter: {
+					via: "tldrify"
+				}
+			}
+		}
+	</script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/raphael/2.1.4/raphael-min.js"></script>
+	<script type="text/javascript" src="/static/js/home.min.js?v20141020-0559"></script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53eb3c204ffde6d7"></script>
+{% endblock %}
+
+
