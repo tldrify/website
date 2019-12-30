@@ -1,5 +1,3 @@
-#!/usr/bin/env python2.7
-
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText

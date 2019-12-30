@@ -5,12 +5,11 @@ Source code for [tldrify.com](https://tldrify.com).
 
 ### Components ###
 
- * `app.py`                 Standalone application for testing purposes.
- * `tldr.wsgi`              WSGI application.
+ * `app.py`                 Python Flask application.
  * `backup-mysql.sh`        Backup script that should run periodically.
- * `init_db.py`             Script that initializes database from entities contained in tldr/model.py.
- * `send_mails.py`          Offline mail sender script that should run periodically.
- * `.config/`               Directory containing various system configuration files needed for running TLDRify service (not included).
+ * `init-db.py`             Script that initializes database from entities contained in tldr/model.py.
+ * `send-mails.py`          Offline mail sender script that should run periodically.
+ * `daily-report.py`        Script that should run on daily basis, which sends usage report to admins.
 
 ### Useful DB queries for debugging ###
 

@@ -2,7 +2,7 @@ from flask import Response, request, jsonify
 from tldr import app
 from tldr.model import db, Citation, CitationView, User
 from tldr import utils
-from flask.ext.login import current_user, login_required
+from flask_login import current_user, login_required
 import time, datetime
 
 

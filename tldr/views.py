@@ -7,7 +7,7 @@ from requests.exceptions import ConnectionError
 from tldr import app
 from tldr.model import db, Citation, User, MailTask
 from tldr import utils
-from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask_login import login_user, logout_user, current_user, login_required
 from wtforms import form, fields, validators
 
 

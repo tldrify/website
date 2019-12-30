@@ -1,5 +1,8 @@
-Flask>=0.10.1
-Flask-SQLAlchemy>=2.0
-Flask-Login>=0.3.0
-chardet>=3.0.0
-MySQL-python>=1.2.5
+Flask-Login==0.4.0
+Flask-SQLAlchemy==2.4.1
+Flask==1.1.1
+chardet==3.0.4
+mysqlclient==1.4.6
+requests==2.22.0
+urllib3==1.25.7
+wtforms==2.2.1

@@ -10,7 +10,7 @@
           {{ error }}
         </div>
       {% endif %}
-      {% for field, errors in form.errors.iteritems() %}
+      {% for field, errors in form.errors.items() %}
         {% for error in errors %}
           <div class="alert alert-danger alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

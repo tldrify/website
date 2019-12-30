@@ -1,5 +1,5 @@
 from flask import request, redirect, url_for
-from flask.ext.login import LoginManager
+from flask_login import LoginManager
 from tldr.model import db, User
 from tldr import app
 
