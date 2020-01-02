@@ -38,7 +38,7 @@ conf = {
 conf.update({k[4:]: v for k, v in os.environ.items() if k.startswith('APP_')})
 
 for key, val in conf.items():
-    app.logger.info('Setting configuration {}={}'.format(key, val))
+    app.logger.debug('Setting configuration {}={}'.format(key, val))
     app.config[key] = val
 
 import tldr.views

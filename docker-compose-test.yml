@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8
+    volumes:
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf:ro
+    env_file: dev.env
+    security_opt:
+      - seccomp:unconfined
+
+  web:
+    build:
+      dockerfile: docker/Dockerfile
+      context: .
+    command: wsgi
+    env_file: dev.env
+    depends_on:
+      - db
+
+  test:
+    build: 
+      dockerfile: test/Dockerfile
+      context: .
+    depends_on:
+      - db

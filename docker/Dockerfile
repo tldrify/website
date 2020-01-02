@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3.8-alpine3.11
 
 ADD requirements.txt /
 
@@ -27,5 +27,7 @@ ADD docker/entrypoint.sh /
 ENV MARIADB_PLUGIN_DIR=/usr/lib/mariadb/plugin
 
 EXPOSE 80
+
 WORKDIR /
+
 ENTRYPOINT ["/entrypoint.sh"]

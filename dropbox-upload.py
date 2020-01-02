@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import os
@@ -9,15 +9,8 @@ from dropbox.files import WriteMode
 from dropbox.exceptions import ApiError, AuthError
 
 
-def load_conf():
-    conf_file = os.path.join(
-        os.path.dirname(__file__), '.config', 'dropbox.json')
-    with open(conf_file, 'r') as f:
-        return json.load(f)
-
-
-def upload(path, conf):
-    dbx = dropbox.Dropbox(conf['access_token'])
+def upload(path, token):
+    dbx = dropbox.Dropbox(token)
     try:
         dbx.users_get_current_account()
     except AuthError as err:
@@ -43,9 +36,7 @@ def upload(path, conf):
 
 
 if __name__ == '__main__':
-    conf = load_conf()
-
     if len(sys.argv) != 2:
         sys.exit('USAGE: %s <file to upload>' % sys.argv[0])
 
-    upload(sys.argv[1], conf)
+    upload(sys.argv[1], os.environ['TOKEN'])
