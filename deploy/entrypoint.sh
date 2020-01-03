@@ -1,12 +1,29 @@
 #!/bin/sh -eu
 
+# Someone would say: "One Docker container - one job, to schedule things use host cron daemon!"
+# But I don't care, base the following works, and less setup is needed :-P
+
 schedule_mailer()
 {
   set +e
   echo "Running periodic mail sending job"
   while true; do
     sleep 20
-    ./send-mails.py
+    timeout 10s ./send-mails.py
+  done
+}
+
+schedule_report()
+{
+  set +e
+  echo "Scheduling periodic daily report"
+  last_run=
+  while true; do
+    sleep 55
+    if [ "$(date +"%H%M")" == "0500" ] && [ "$last_run" != "$(date +"%d")" ]; then
+      timeout 15s ./daily-report.py
+      last_run="$(date +"%d")"
+    fi
   done
 }
 
@@ -25,6 +42,7 @@ run_wsgi()
   done
 
   schedule_mailer&
+  schedule_report&
   nginx && uwsgi --ini wsgi.ini
 }
 

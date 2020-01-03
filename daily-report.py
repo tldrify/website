@@ -5,6 +5,7 @@ from tldr.model import db, Citation, CitationView, User
 from datetime import datetime, timedelta
 from jinja2 import Environment, FileSystemLoader
 
+
 if __name__ == '__main__':
     now = datetime.now()
     day_ago = now - timedelta(days=1)
