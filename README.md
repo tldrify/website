@@ -24,3 +24,10 @@ When everything is ready, run:
 
     ENV=prd ./deploy/run.sh
 
+
+### Minifying JS/CSS files ###
+
+Use [https://github.com/spektom/minify](https://github.com/spektom/minify) script for minifying JS and CSS files as follows:
+
+    /path/to/minify.py tldr/static
+
