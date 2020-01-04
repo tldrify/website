@@ -94,7 +94,7 @@ def resetpass():
         user = User.query.filter_by(email=form.email.data).first()
         body = render_template(
             'emails/reset_link.html', token=user.get_token())
-        send_mail(user.email, u'Password reset on TLDRify', body)
+        send_mail(user.email, 'Password reset on TLDRify', body)
         return render_template("reset_pass.html", form=form, sent=True)
     else:
         return render_template("reset_pass.html", form=form)
@@ -195,7 +195,7 @@ def feedback():
         'emails/feedback.html',
         email=request.form['email'],
         text=request.form['body'])
-    send_mail(u'webmaster@tldrify.com', u'New Feedback on TLDRify', body)
+    send_mail('webmaster@tldrify.com', 'New Feedback on TLDRify', body)
     return Response(status=202)
 
 

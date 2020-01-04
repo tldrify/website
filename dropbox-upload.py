@@ -39,4 +39,4 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         sys.exit('USAGE: %s <file to upload>' % sys.argv[0])
 
-    upload(sys.argv[1], os.environ['TOKEN'])
+    upload(sys.argv[1], os.environ['DROPBOX_TOKEN'])

@@ -7,11 +7,7 @@ container=tldrify-${ENV}_db_1
 
 case $cmd in
   backup)
-    docker exec -ti -e MYSQL_PWD=tldr $container mysqldump -u tldr tldr 2>/dev/null >$file
-    ;;
-  restore)
-    docker cp $file $container:/tmp
-    docker exec -ti -e MYSQL_PWD=tldr $container mysql -u tldr tldr -e "source /tmp/$(basename $file)"
+    docker exec -ti $container mysqldump -u tldr tldr 2>/dev/null >$file
     ;;
   upload)
     gzip $file && ./dropbox-upload.py $file

@@ -1,13 +1,13 @@
 import re, chardet
 
-RE_BASE_HREF = re.compile(u'<base[^>]*href=[^>]*>', re.I)
-RE_HEAD_START = re.compile(u'(<head(?:\s+[^>]*)?>)', re.I)
-RE_HEAD_END = re.compile(u'(</head\s*>)', re.I)
-RE_BODY_END = re.compile(u'(.*)(</body\s*>)', re.I | re.S)
-RE_HTML_END = re.compile(u'(.*)(</html\s*>)', re.I | re.S)
-RE_CHARSET = re.compile(u'<meta.*charset=["\']?([\w\-]+)["\']?', re.I)
-RE_REDIRECT1 = re.compile(u'(\.location(?:\.href)?)\s*=')
-RE_REDIRECT2 = re.compile(u'(\.location\.(?:replace|assign))\(')
+RE_BASE_HREF = re.compile('<base[^>]*href=[^>]*>', re.I)
+RE_HEAD_START = re.compile('(<head(?:\s+[^>]*)?>)', re.I)
+RE_HEAD_END = re.compile('(</head\s*>)', re.I)
+RE_BODY_END = re.compile('(.*)(</body\s*>)', re.I | re.S)
+RE_HTML_END = re.compile('(.*)(</html\s*>)', re.I | re.S)
+RE_CHARSET = re.compile('<meta.*charset=["\']?([\w\-]+)["\']?', re.I)
+RE_REDIRECT1 = re.compile('(\.location(?:\.href)?)\s*=')
+RE_REDIRECT2 = re.compile('(\.location\.(?:replace|assign))\(')
 
 
 def decode_response(response):
@@ -38,20 +38,20 @@ def detect_charset(html):
 
 def fix_base_url(html, base_url):
     if not RE_BASE_HREF.match(html):
-        html = RE_HEAD_START.sub(u'\\1\n<base href="%s" />' % base_url, html,
+        html = RE_HEAD_START.sub('\\1\n<base href="%s" />' % base_url, html,
                                  1)
     return html
 
 
 def disable_redirects(html):
-    html = RE_REDIRECT1.sub(u'\\1!=', html)
-    html = RE_REDIRECT2.sub(u'\\1!=(', html)
+    html = RE_REDIRECT1.sub('\\1!=', html)
+    html = RE_REDIRECT2.sub('\\1!=(', html)
     return html
 
 
 def inject_scripts(html, citation):
     html = disable_redirects(html)
-    head_start_inject = u'''
+    head_start_inject = '''
 \\1
 <script type="text/javascript">
 (function(open){
@@ -68,13 +68,13 @@ def inject_scripts(html, citation):
 '''
     html = RE_HEAD_START.sub(head_start_inject, html, 1)
 
-    head_end_inject = u'''
+    head_end_inject = '''
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 \\1
 '''
     html = RE_HEAD_END.sub(head_end_inject, html, 1)
 
-    body_inject = u'''
+    body_inject = '''
 \\1
 <script src="//tldrify.com/static/js/ajaxslt.min.js?v20140205-1504" type="text/javascript"></script> 
 <script src="//cdn.jsdelivr.net/g/rangy@1.2.3(rangy-core.js),jquery@2.1.4(jquery.min.js)" type="text/javascript"></script>
