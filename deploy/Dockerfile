@@ -8,6 +8,7 @@ ADD requirements.txt /
 RUN apk add \
       build-base \
       linux-headers \
+      pcre-dev \
     && pip3 install --prefix=/install -r /requirements.txt
 
 # prod

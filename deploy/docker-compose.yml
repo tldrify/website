@@ -9,7 +9,7 @@ services:
     volumes:
       - ./vol/sqlite.db:/tmp/sqlite.db
     ports:
-      - 8080:8080
+      - 80:8080
     restart: on-failure
     env_file: ${ENV}.env
     logging:

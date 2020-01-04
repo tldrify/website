@@ -6,10 +6,11 @@
 schedule_mailer()
 {
   set +e
-  echo "[$(date -Is)] Running periodic mail sending job"
+  echo "[$(date -Is)] Scheduling periodic mail sending job"
 
   while true; do
     sleep 30
+    echo "[$(date -Is)] Sending out e-mails"
     timeout 10s ./send-mails.py
   done
 }
@@ -42,7 +43,7 @@ schedule_backups()
     sqlite3 /tmp/sqlite.db ".clone ${backup_file}"
     gzip -f $backup_file
     if [ -z "${DROPBOX_TOKEN}" ]; then
-      echo "[$(date -Is)] Skipping upload to Dropbox since DROPBOX_TOKEN is undefined"
+      echo "[$(date -Is)] WARNING: Skipping upload to Dropbox since DROPBOX_TOKEN is undefined"
     else
       ./dropbox-upload.py ${backup_file}.gz
     fi
