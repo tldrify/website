@@ -38,8 +38,7 @@ def detect_charset(html):
 
 def fix_base_url(html, base_url):
     if not RE_BASE_HREF.match(html):
-        html = RE_HEAD_START.sub('\\1\n<base href="%s" />' % base_url, html,
-                                 1)
+        html = RE_HEAD_START.sub('\\1\n<base href="%s" />' % base_url, html, 1)
     return html
 
 
@@ -76,7 +75,7 @@ def inject_scripts(html, citation):
 
     body_inject = '''
 \\1
-<script src="//tldrify.com/static/js/ajaxslt.min.js?v20140205-1504" type="text/javascript"></script> 
+<script src="//tldrify.com/static/js/ajaxslt.min.js?v20140205-1504" type="text/javascript"></script>
 <script src="//cdn.jsdelivr.net/g/rangy@1.2.3(rangy-core.js),jquery@2.1.4(jquery.min.js)" type="text/javascript"></script>
 <script src="//tldrify.com/static/js/tldr.min.js?v20150427-1637" type="text/javascript"></script>
 <script type="text/javascript">

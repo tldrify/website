@@ -1,7 +1,7 @@
 #!/bin/sh -eu
 
 # Someone would say: "One Docker container - one job, to schedule things use host cron daemon!"
-# But I don't care, base the following works, and less setup is needed :-P
+# But I don't care unless the following works, and less setup is needed :-P
 
 schedule_mailer()
 {

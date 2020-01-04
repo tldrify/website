@@ -24,14 +24,3 @@ When everything is ready, run:
 
     ENV=prd ./deploy/run.sh
 
-
-### Backup ###
-
-To backup the database, run:
-
-    ENV=prd ./scripts/backup.sh backup /tmp/tldr-db.sql
-
-To restore, run the opposite command:
-
-    ENV=prd ./scripts/backup.sh restore /tmp/tldr-db.sql
-
