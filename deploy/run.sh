@@ -16,4 +16,4 @@ trap cleanup EXIT
 [ -d deploy/vol ] || mkdir -p deploy/vol
 
 exec docker-compose -p tldrify-$ENV -f deploy/docker-compose.yml up \
-  --force-recreate --build --abort-on-container-exit
+  --remove-orphans --force-recreate --build --abort-on-container-exit

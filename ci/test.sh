@@ -13,4 +13,4 @@ cleanup() {
 trap cleanup EXIT
 
 exec docker-compose -p tldrify-test -f ci/docker-compose.yml up \
-  --force-recreate --build --abort-on-container-exit --exit-code-from test
+  --remove-orphans --force-recreate --build --abort-on-container-exit --exit-code-from test

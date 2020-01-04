@@ -12,3 +12,8 @@ services:
       - 8080:8080
     restart: on-failure
     env_file: ${ENV}.env
+    logging:
+      driver: json-file
+      options:
+        max-file: "10"
+        max-size: 10m

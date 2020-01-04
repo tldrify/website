@@ -9,7 +9,7 @@ schedule_mailer()
   echo "[$(date -Is)] Running periodic mail sending job"
 
   while true; do
-    sleep 20
+    sleep 30
     timeout 10s ./send-mails.py
   done
 }
