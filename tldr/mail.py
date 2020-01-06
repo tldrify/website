@@ -1,5 +1,3 @@
-#!/usr/bin/env python2.7
-
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -13,10 +11,10 @@ def send(sender, recipients, subject, **args):
     msg["To"] = ", ".join(recipients)
 
     if "text" in args:
-        msg.attach(MIMEText(args["text"].encode("utf-8"), "plain"))
+        msg.attach(MIMEText(args["text"], "plain"))
 
     if "html" in args:
-        msg.attach(MIMEText(args["html"].encode("utf-8"), "html"))
+        msg.attach(MIMEText(args["html"], "html"))
 
     server = smtplib.SMTP_SSL(conf['SMTP_HOST'])
     server.login(conf['SMTP_USER'], conf['SMTP_PASS'])

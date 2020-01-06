@@ -1,14 +1,14 @@
 import datetime
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 from tldr import app
-from urlparse import urlparse
+from urllib.parse import urlparse
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 db = SQLAlchemy(app)
 
 
-def baseN(num, b, numerals=u'0123456789abcdefghijklmnopqrstuvwxyz'):
+def baseN(num, b, numerals='0123456789abcdefghijklmnopqrstuvwxyz'):
     return ((num == 0) and numerals[0]) or (
         baseN(num // b, b, numerals).lstrip(numerals[0]) + numerals[num % b])
 
@@ -47,9 +47,8 @@ class Citation(db.Model):
     @staticmethod
     def by_short_id(id):
         try:
-            return Citation.query.filter_by(
-                id=Citation.short_id_to_id(id)).filter_by(
-                    deleted=None).first()
+            return Citation.query.filter_by(id=Citation.short_id_to_id(
+                id)).filter_by(deleted=None).first()
         except ValueError:
             return None
 

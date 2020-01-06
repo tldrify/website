@@ -2,7 +2,9 @@ from flask import Response, request, jsonify
 from tldr import app
 from tldr.model import db, Citation, CitationView, User
 from tldr import utils
-from flask.ext.login import current_user, login_required
+from flask_login import current_user, login_required
+from sqlalchemy import text
+
 import time, datetime
 
 
@@ -12,7 +14,7 @@ def links():
     per_page = int(request.args.get('perPage', 10))
     cur_page = int(request.args.get('currentPage', 1))
 
-    sort = [[u'created', u'desc']]
+    order_by = ['created', 'desc']
     filter = []
     total = current_user.citations.filter_by(deleted=None).count()
     start = per_page * (cur_page - 1)
@@ -21,16 +23,16 @@ def links():
 
     sortargs = request.args.getlist('sort[0][]')
     if len(sortargs) == 2:
-        if sortargs[1] != u'desc':
-            sortargs[1] = u'asc'
-        sort = [sortargs]
+        if sortargs[1] != 'desc':
+            sortargs[1] = 'asc'
+        order_by = sortargs
 
     query = db.session.query(Citation, db.func.count(CitationView.id).label('views'))\
      .outerjoin(CitationView)\
      .group_by(Citation.id)\
      .filter(Citation.user_id==current_user.id)\
      .filter(Citation.deleted==None)\
-     .order_by('%s %s' % (sort[0][0], sort[0][1]))
+     .order_by(text('{} {}'.format(*order_by)))
 
     for c, v in query[start:end]:
         data.append({
@@ -46,7 +48,7 @@ def links():
         'perPage': per_page,
         'currentPage': cur_page,
         'data': data,
-        'sort': sort,
+        'sort': [order_by],
         'filter': filter
     })
 
@@ -77,8 +79,9 @@ def create_js():
     db.session.add(citation)
     db.session.commit()
 
-    js = 'TLDR.restore("%s", "%s", %d, %s, true);' % (
-        citation.url, citation.short_url(), citation.id, data)
+    js = 'TLDR.restore("%s", "%s", %d, %s, true);' % (citation.url,
+                                                      citation.short_url(),
+                                                      citation.id, data)
     return Response(js, mimetype='application/javascript; charset=utf-8')
 
 

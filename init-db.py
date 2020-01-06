@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from tldr import app
+from tldr.model import db
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    db.create_all()

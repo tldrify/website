@@ -23,7 +23,8 @@
         <dt>Install the button.</dt>
         <dd>
           <p>Drag this button on to your Bookmarks toolbar
-                        {% if "Maxthon" in request.headers.get('User-Agent') %}
+          {% if request.headers.get('User-Agent') %}
+            {% if "Maxthon" in request.headers.get('User-Agent') %}
               <span>, or install Maxthon <a href="http://extension.maxthon.com/detail/index.php?view_id=2905" target="_blank">extension</a></span>
             {% elif request.user_agent.browser == "chrome" %}
               <span>, or install Google Chrome <a href="//chrome.google.com/webstore/detail/dbphpdgmhigmaepjklmklmlcoinihjdo" target="_blank">extension</a></span>
@@ -34,17 +35,18 @@
             {% elif request.user_agent.browser == "edge" %}
               <span>, or install Edge <a href="//www.microsoft.com/en-us/p/tldrify/9pn2qc3gwjfd">extension</a></span>
             {% endif %}
+          {% endif %}
           :</p>
           <a id="bookmarklet" class="btn btn-success" href="javascript:(function(d){d.body.appendChild(d.createElement('script')).src='//tldrify.com/static/js/bookmarklet.min.js?_'+new Date().getTime();})(document);">TLDRify</a>
         </dd>
 
         <dt>Navigate to a Website.</dt>
-        <dd><p>Go to the Website that you want to share a quote from.</p></dd>
+        <dd><p>Go to the Website that you want to share a citation from.</p></dd>
 
         <dt>Select some text.</dt>
-        <dd><p>Use your mouse to select a quote that you'd like to share.</p></dd>
+        <dd><p>Use your mouse to select the text that you'd like to share.</p></dd>
 
-        <dt>Press the TLDRify button.</dt>
+        <dt>Click on TLDRify.</dt>
         <dd><p>Take the generated short link, and share it instantly with your friends.</p></dd>
       </dl>
     </div>

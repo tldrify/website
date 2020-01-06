@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  web:
+    build:
+      dockerfile: deploy/Dockerfile
+      context: ..
+    command: wsgi
+    env_file: ../deploy/dev.env
+
+  test:
+    build: 
+      dockerfile: ci/Dockerfile
+      context: ..

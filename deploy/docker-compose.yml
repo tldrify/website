@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  web:
+    build:
+      dockerfile: deploy/Dockerfile
+      context: ..
+    command: wsgi
+    volumes:
+      - ./vol/sqlite.db:/tmp/sqlite.db
+    ports:
+      - 80:8080
+    restart: on-failure
+    env_file: ${ENV}.env
+    logging:
+      driver: json-file
+      options:
+        max-file: "10"
+        max-size: 10m
