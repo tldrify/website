@@ -1011,7 +1011,7 @@ var TLDR = (function($) {
 							$("body").append(
 								$("<iframe>")
 									.attr("id", "tldr-iframe")
-									.attr("src", "//tldrify.com/sharebox?v20140310-1720&url=" + encodeURIComponent(short_url) + "&title=" + encodeURIComponent(title))
+									.attr("src", "//tldrify.com/sharebox?v20200106-2109&url=" + encodeURIComponent(short_url) + "&title=" + encodeURIComponent(title))
 									.attr("width", 210)
 									.attr("height", 115)
 									.attr("frameborder", 0)

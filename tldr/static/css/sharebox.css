@@ -42,27 +42,27 @@ hr {
 }
 
 .glyphicon-share-clipboard {
-	background-image: url("../images/clipboard.png");
+	background-image: url("../images/clipboard.png?v202001062115");
 }
 
 .glyphicon-share-mail {
-	background-image: url("../images/email.png");
-}
-
-.glyphicon-share-google {
-	background-image: url("../images/googleplus.png");
+	background-image: url("../images/email.png?v202001062115");
 }
 
 .glyphicon-share-twitter {
-	background-image: url("../images/twitter.png");
+	background-image: url("../images/twitter.png?v202001062115");
+}
+
+.glyphicon-share-reddit {
+	background-image: url("../images/reddit.png?v202001062115");
 }
 
 .glyphicon-share-facebook {
-	background-image: url("../images/facebook.png");
+	background-image: url("../images/facebook.png?v202001062115");
 }
 
 .glyphicon-share-linkedin {
-	background-image: url("../images/linkedin.png");
+	background-image: url("../images/linkedin.png?v202001062115");
 }
 
 .share-buttons {

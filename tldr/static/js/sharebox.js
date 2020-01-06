@@ -11,9 +11,9 @@ $(function($) {
 	c.find("input").attr("id", "share-url");
 	c.find("[data-clipboard-target]").attr("id", "clipboard-btn");
 	c.find("a.share-mail").attr("href", "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(url));
-	c.find("a.share-google").attr("href", "https://plus.google.com/share?url=" + encodeURIComponent(title + " - " + url));
-	c.find("a.share-twitter").attr("href", "https://twitter.com/?status=" + encodeURIComponent(title + " - " + url));
-	c.find("a.share-linkedin").attr("href", "https://www.linkedin.com/shareArticle?mini=true&url=" + encodeURIComponent(url) + "&title=" + encodeURIComponent(title) + "&summary=&source=");
+	c.find("a.share-reddit").attr("href", "https://reddit.com/submit?url=" + encodeURIComponent(url) + "&title=" + encodeURIComponent(title));
+	c.find("a.share-twitter").attr("href", "https://twitter.com/share?text=" + encodeURIComponent(title + " via @tldrify") + "&url=" + encodeURIComponent(url));
+	c.find("a.share-linkedin").attr("href", "https://linkedin.com/shareArticle?mini=true&url=" + encodeURIComponent(url) + "&title=" + encodeURIComponent(title) + "&summary=&source=");
 	//c.find("a.share-facebook").attr("href", "https://www.facebook.com/sharer/sharer.php?s=100&p[url]=" + encodeURIComponent(url) + "&p[title]=" + encodeURIComponent(title));
 
 	$("body").popover({

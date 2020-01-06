@@ -12,7 +12,7 @@
 		var sources = [ '//tldrify.com/static/js/ajax-spin.min.js?v20150104-1710',
 				'//tldrify.com/static/js/ajaxslt.min.js?v20140205-1504',
 				'//cdn.jsdelivr.net/g/json2@0.1(json2.min.js),rangy@1.2.3(rangy-core.js),jquery@2.1.4(jquery.min.js)',
-				'//tldrify.com/static/js/tldr.min.js?v20150427-1637' ];
+				'//tldrify.com/static/js/tldr.min.js?v20200106-2110' ];
 
 		var loadNextScript = function() {
 			if (sources.length > 0) {
