@@ -2,10 +2,11 @@ import requests
 import os
 import urllib
 import re
+
 from flask import render_template, request, abort, Response, redirect, url_for, send_from_directory, jsonify
 from requests.exceptions import ConnectionError
 from tldr import app
-from tldr.model import db, Citation, User, MailTask
+from tldr.model import db, Citation, User, MailTask, hash_password
 from tldr import utils
 from flask_login import login_user, logout_user, current_user, login_required
 from wtforms import form, fields, validators
@@ -79,7 +80,7 @@ def register():
         return redirect(url_for("index"))
     form = SignupForm(request.form)
     if request.method == "POST" and form.validate():
-        user = User(form.email.data, form.password.data)
+        user = User(form.email.data, hash_password(form.password.data))
         db.session.add(user)
         db.session.commit()
         login_user(user, remember=True)
@@ -111,7 +112,7 @@ def changepass():
 
     form = ChangePasswordForm(request.form)
     if request.method == "POST" and form.validate():
-        user.password = form.password.data
+        user.password = hash_password(form.password.data)
         db.session.commit()
         return redirect(url_for("login"))
     else:
@@ -207,7 +208,7 @@ class LoginForm(form.Form):
         if not form.Form.validate(self):
             return False
         user = User.query.filter_by(email=self.email.data).first()
-        if user is None or user.password != self.password.data:
+        if user is None or user.password != hash_password(self.password.data):
             self.password.errors.append('Wrong e-mail or password')
             return False
         self.user = user

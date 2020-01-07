@@ -1,4 +1,6 @@
 import datetime
+import hashlib
+
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from tldr import app
@@ -11,6 +13,12 @@ db = SQLAlchemy(app)
 def baseN(num, b, numerals='0123456789abcdefghijklmnopqrstuvwxyz'):
     return ((num == 0) and numerals[0]) or (
         baseN(num // b, b, numerals).lstrip(numerals[0]) + numerals[num % b])
+
+
+def hash_password(password):
+    h = hashlib.sha256()
+    h.update(password.encode("utf-8"))
+    return h.hexdigest()
 
 
 class Citation(db.Model):
