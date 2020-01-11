@@ -14,6 +14,8 @@ RUN apk add \
 # prod
 FROM base AS prod
 
+ADD https://raw.githubusercontent.com/spektom/dropbox-upload/master/dropbox-upload.py /
+
 RUN apk add --no-cache --update \
       nginx \
       sqlite \
@@ -21,7 +23,8 @@ RUN apk add --no-cache --update \
     && chown -R nginx /var/lib/nginx \
     && chown -R nginx /var/log/nginx \
     && mkdir -p /run/nginx \
-    && chown nginx /run/nginx
+    && chown nginx /run/nginx \
+    && chmod 755 /dropbox-upload.py
 
 COPY --from=builder /install /usr/local
 
