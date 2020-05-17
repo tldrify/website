@@ -76,7 +76,8 @@ def inject_scripts(html, citation):
     body_inject = '''
 \\1
 <script src="//tldrify.com/static/js/ajaxslt.min.js?v20140205-1504" type="text/javascript"></script>
-<script src="//cdn.jsdelivr.net/g/rangy@1.2.3(rangy-core.js),jquery@2.1.4(jquery.min.js)" type="text/javascript"></script>
+<script src="//tldrify.com/static/js/rangy-core.min.js?v20200517-0927" type="text/javascript"></script>
+<script src="//tldrify.com/static/js/jquery.min.js?v20200517-0927" type="text/javascript"></script>
 <script src="//tldrify.com/static/js/tldr.min.js?v20200106-2110" type="text/javascript"></script>
 <script type="text/javascript">
 (function($){
