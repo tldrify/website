@@ -36,16 +36,14 @@ def static_from_root():
 
 @app.route('/tldrify.safariextz')
 def safari_extension():
-    return send_from_directory(
-        app.static_folder,
-        request.path[1:],
-        mimetype="application/octet-stream")
+    return send_from_directory(app.static_folder,
+                               request.path[1:],
+                               mimetype="application/octet-stream")
 
 
 @app.route('/tldrify.plist')
 def safari_extension_manifest():
-    return send_from_directory(
-        app.static_folder, request.path[1:], mimetype="text/xml")
+    return send_from_directory(app.static_folder, request.path[1:], mimetype="text/xml")
 
 
 @app.route('/terms', methods=['GET'])
@@ -93,8 +91,7 @@ def resetpass():
     form = ResetPasswordForm(request.form)
     if request.method == "POST" and form.validate():
         user = User.query.filter_by(email=form.email.data).first()
-        body = render_template(
-            'emails/reset_link.html', token=user.get_token())
+        body = render_template('emails/reset_link.html', token=user.get_token())
         send_mail(user.email, 'Password reset on TLDRify', body)
         return render_template("reset_pass.html", form=form, sent=True)
     else:
@@ -133,10 +130,9 @@ def manage():
 
 @app.route('/sharebox', methods=['GET'])
 def sharebox():
-    return render_template(
-        'sharebox.html',
-        url=request.args.get('url', ''),
-        title=request.args.get('title', ''))
+    return render_template('sharebox.html',
+                           url=request.args.get('url', ''),
+                           title=request.args.get('title', ''))
 
 
 @app.route('/ajaxproxy', methods=['GET', 'HEAD', 'POST', 'OPTIONS'])
@@ -144,12 +140,11 @@ def ajaxproxy():
     headers = {}
     for h in ['User-Agent', 'Cache-Control', 'Accept', 'Accept-Language']:
         headers[h] = request.headers.get(h)
-    r = requests.request(
-        request.method,
-        request.args.get('url', ''),
-        headers=headers,
-        data=request.form,
-        verify=False)
+    r = requests.request(request.method,
+                         request.args.get('url', ''),
+                         headers=headers,
+                         data=request.form,
+                         verify=False)
     response = Response(r.content)
     for h in ['Content-Type']:
         response.headers[h] = r.headers.get(h)
@@ -168,14 +163,16 @@ def open(id):
     cur_proto = request.url[0:request.url.index(':')]
     orig_proto = citation.url[0:citation.url.index(':')]
     if cur_proto != orig_proto:
-        return redirect(
-            request.url.replace(cur_proto, orig_proto, 1), code=301)
+        return redirect(request.url.replace(cur_proto, orig_proto, 1), code=301)
 
     try:
         headers = {}
         for h in ['User-Agent', 'Cache-Control', 'Accept', 'Accept-Language']:
             headers[h] = request.headers.get(h)
-        response = requests.get(citation.url, headers=headers, verify=False)
+        response = requests.get(citation.url,
+                                headers=headers,
+                                verify=False,
+                                timeout=(3, 10))
     except ConnectionError:
         return render_template('errors/broken.html', url=citation.url)
 
@@ -192,10 +189,9 @@ def open(id):
 
 @app.route("/feedback", methods=["POST"])
 def feedback():
-    body = render_template(
-        'emails/feedback.html',
-        email=request.form['email'],
-        text=request.form['body'])
+    body = render_template('emails/feedback.html',
+                           email=request.form['email'],
+                           text=request.form['body'])
     send_mail('webmaster@tldrify.com', 'New Feedback on TLDRify', body)
     return Response(status=202)
 
@@ -227,16 +223,13 @@ class SignupForm(form.Form):
         if not form.Form.validate(self):
             return False
         if User.query.filter_by(email=self.email.data).count() > 0:
-            self.email.errors.append(
-                'This e-mail address is already registered')
+            self.email.errors.append('This e-mail address is already registered')
             return False
         return True
 
 
 class ResetPasswordForm(form.Form):
-    email = fields.TextField(
-        validators=[validators.Required(),
-                    validators.Email()])
+    email = fields.TextField(validators=[validators.Required(), validators.Email()])
 
     def validate(self):
         if not form.Form.validate(self):
