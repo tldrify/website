@@ -963,7 +963,7 @@ var TLDR = (function($) {
 		},
 
 		restore : function(orig_url, short_url, citation_id, data, show, last_try) {
-			if (!show) {
+			if (!show && window.location.hash != '#noheader') {
 				showHeader(orig_url);
 			}
 			try {

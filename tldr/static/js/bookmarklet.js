@@ -13,7 +13,7 @@
       '//tldrify.com/static/js/ajaxslt.min.js?v20140205-1504',
       '//tldrify.com/static/js/rangy-core.min.js?v20200517-0927',
       '//tldrify.com/static/js/jquery.min.js?v20200517-0927',
-      '//tldrify.com/static/js/tldr.min.js?v20200106-2110'
+      '//tldrify.com/static/js/tldr.min.js?v20210813-0707'
     ];
 
     var loadNextScript = function() {
