@@ -944,17 +944,29 @@ var TLDR = (function($) {
 	}
 
 	return {
-		save : function() {
+		save : function(fromExtension = false) {
 			// Check that the selection is not empty:
 			if (getSelectionText().trim().length > 0) {
 				rangy.init();
 				var selection = serializeSelection();
 				var data = JSON.stringify(selection);
-				$(function() {
-					$.getScript("//tldrify.com/api/create.js?url="
-						+ encodeURIComponent(document.location.href)
-						+ "&data=" + encodeURIComponent(data));
-				});
+				var url = document.location.href;
+				if (fromExtension) {
+					// Chrome/Edge/FF extension
+					chrome.runtime.sendMessage({
+						query: 'createCitation',
+						url: url,
+						data: data
+					}, res => {
+						TLDR.restore(url, res.short_url, res.id, data, true);
+					});
+				} else {
+					$(function() {
+						$.getScript("//tldrify.com/api/create.js?url="
+							+ encodeURIComponent(url)
+							+ "&data=" + encodeURIComponent(data));
+					});
+				}
 			} else {
 				if (typeof (TLDR_spin) !== 'undefined') {
 					TLDR_spin.hide();

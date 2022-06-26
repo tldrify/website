@@ -78,7 +78,7 @@ def inject_scripts(html, citation):
 <script src="//tldrify.com/static/js/ajaxslt.min.js?v20140205-1504" type="text/javascript"></script>
 <script src="//tldrify.com/static/js/rangy-core.min.js?v20200517-0927" type="text/javascript"></script>
 <script src="//tldrify.com/static/js/jquery.min.js?v20200517-0927" type="text/javascript"></script>
-<script src="//tldrify.com/static/js/tldr.min.js?v20210813-0707" type="text/javascript"></script>
+<script src="//tldrify.com/static/js/tldr.min.js?v20220626-0825" type="text/javascript"></script>
 <script type="text/javascript">
 (function($){
  var retries = 15;

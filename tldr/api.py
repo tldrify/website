@@ -84,6 +84,20 @@ def create_js():
                                                       citation.id, data)
     return Response(js, mimetype='application/javascript; charset=utf-8')
 
+@app.route('/api/create', methods=['POST'])
+def create():
+    url = request.json['url'];
+    data = request.json['data'];
+
+    citation = Citation(url, data, request.user_agent.string)
+    citation.user_id = current_user.get_id()
+    db.session.add(citation)
+    db.session.commit()
+
+    return jsonify({
+        'id': citation.id,
+        'short_url': citation.short_url()
+    })
 
 @app.route('/api/citation/<id>/view', methods=['POST'])
 def create_citation_view(id):
