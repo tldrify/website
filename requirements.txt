@@ -8,4 +8,4 @@ itsdangerous==2.0.1
 requests==2.25.1
 urllib3==1.26.5
 uwsgi==2.0.18
-wtforms==3.0.1
+wtforms==2.3.3
