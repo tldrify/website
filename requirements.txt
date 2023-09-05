@@ -8,5 +8,5 @@ email-validator==1.2.1
 itsdangerous==2.1.2
 requests==2.31.0
 urllib3==1.26.5
-uwsgi==2.0.18
+uwsgi==2.0.22
 wtforms==2.3.3
